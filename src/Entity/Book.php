@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\Entity\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -13,14 +14,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  */
 class Book
 {
-    /**
-     * @Groups( { "details", "draft" } )
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @Groups( { "details", "draft" } )

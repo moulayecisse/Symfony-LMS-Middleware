@@ -1,2 +1,88 @@
 resources:
-    App\Entity\User:
+    App\Entity\Author:
+        collectionOperations:
+            get: ~
+            api_author_most_populars:
+                swagger_context:
+                    summary: "Best Sellers"
+                    description: "Book that have been bye more"
+            api_author_best_selling:
+                swagger_context:
+                    summary: "Best Sellers"
+                    description: "Book that have been bye more"
+            api_book_author_get_subresource:
+                method: 'GET' # nothing more to add if we want to keep the default controller
+                normalization_context: {groups: ['book']}
+        itemOperations:
+            get: ~
+            api_author_count:
+
+    App\Entity\Category:
+        shortName: 'Category'
+        description: 'An category from our library'
+        iri: 'http://schema.org/Category'
+        attributes:
+            pagination_items_per_page: 25
+
+    App\Entity\Book:
+        shortName: 'Book'
+        description: 'An category from our library'
+        iri: 'http://schema.org/Book'
+        attributes:
+            id:
+                normalization_context:
+                    groups: [ 'draft', 'details']
+            normalization_context:
+                groups: [ 'draft', 'details']
+            pagination_items_per_page: 25
+        collectionOperations:
+            get: ~ # nothing more to add if we want to keep the default controller
+                swagger_context:
+                    summary: "Books of our libraries"
+                    description: "Book that have been bye more"
+                normalization_context:
+                    groups: [ 'draft', 'details']
+            api_book_best_sellers:
+                swagger_context:
+                    summary: "Best Sellers"
+                    description: "Book that have been bye more"
+                normalization_context:
+                    groups: [ 'draft' ]
+            api_book_new_releases:
+                swagger_context:
+                    summary: "Best Sellers"
+                    description: "Book that have been bye more"
+                normalization_context:
+                    groups: [ 'draft' ]
+            api_book_picked_by_author:
+                swagger_context:
+                    summary: "Best Sellers"
+                    description: "Book that have been bye more"
+                normalization_context:
+                    groups: [ 'draft' ]
+        itemOperations:
+            get: ~
+            api_book_count:
+            api_book_featured:
+            api_book_picked_by_author:
+            api_call_to_action:
+            api_latest_posts:
+            api_service_info:
+
+    App\Entity\SubCategory:
+        itemOperations:
+            get: ~
+            api_sub_category_count:
+            api_sub_category_counts:
+
+    App\Entity\Testimonial:
+        itemOperations:
+            get: ~
+            api_testimonial_count:
+
+    App\Entity\Member:
+        itemOperations:
+            get: ~
+            api_member_count:
+            api_member_current:
+            api_member_subscribe:

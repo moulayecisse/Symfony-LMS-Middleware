@@ -2,53 +2,28 @@
 
 namespace App\Entity;
 
+use App\Traits\Entity\BiographyTrait;
+use App\Traits\Entity\BirthdayTrait;
+use App\Traits\Entity\FirstNameTrait;
+use App\Traits\Entity\IdTrait;
+use App\Traits\Entity\LastNameTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Book Author Class.
+ *
+ * @author  Moulaye Cissé <moulaye.c@gmail.com>
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
 class Author
 {
-    /**
-     * @Groups( "details" )
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @Groups( { "details", "draft" } )
-     *
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $firstName;
-
-    /**
-     * @Groups( { "details", "draft" } )
-     *
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $lastName;
-
-    /**
-     * @Groups( "details" )
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $biography;
-
-    /**
-     * @Groups( "details" )
-     *
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $birthday;
+    use IdTrait;
+    use FirstNameTrait;
+    use LastNameTrait;
+    use BiographyTrait;
+    use BirthdayTrait;
 
     /**
      * @var Book[]
@@ -86,59 +61,6 @@ class Author
     {
         $this->books = [];
         $this->contributedBooks = [];
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getBiography(): ?string
-    {
-        return $this->biography;
-    }
-
-    public function setBiography(?string $biography): self
-    {
-        $this->biography = $biography;
-
-        return $this;
-    }
-
-    public function getBirthday(): ?\DateTimeInterface
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(?\DateTimeInterface $birthday): self
-    {
-        $this->birthday = $birthday;
-
-        return $this;
     }
 
     /**
